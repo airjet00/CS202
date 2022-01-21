@@ -16,10 +16,9 @@ int main(int argc, char *argv[])
     string str = argv[1];
     if (str.compare("ftoc") == 0)
         cout << cpp_ftoc(argv[2]) << endl;
-    else if (str.compare("ctof"))
-    {
+    if (str.compare("ctof") == 0)
         cout << c_ctof(argv[2]) << endl;
-    }
+    
     
     // string fstr = argv[2];
     // double f = stod(fstr); 
@@ -35,6 +34,8 @@ double cpp_ftoc(const char* str){
     double result = 0.0;
     
     double f = stod(str);
+    result = (f - 32.0) * (5.0/9.0);
+
     return result;
 }
 
@@ -42,5 +43,8 @@ double cpp_ftoc(const char* str){
 double c_ctof(const char* str){
     double result = 0.0;
 
+    double c = stod(str);
+    result = (c * (9.0/5.0)) + 32;
+    
     return result;
 }
