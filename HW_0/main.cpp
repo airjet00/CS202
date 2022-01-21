@@ -11,20 +11,18 @@ int main(int argc, char *argv[])
 
     //if cmd line variable valid
     //check ftoc or ctof
-    //call function
+    //call function, print results
 
+    //TODO add edge case for values. 
     string str = argv[1];
+    const char* temp = argv[2];
     if (str.compare("ftoc") == 0)
-        cout << cpp_ftoc(argv[2]) << endl;
+        cout << cpp_ftoc(temp) << endl;
     if (str.compare("ctof") == 0)
-        cout << c_ctof(argv[2]) << endl;
+        cout << c_ctof(temp) << endl;
     
-    
-    // string fstr = argv[2];
-    // double f = stod(fstr); 
-    // cout << f - 2 << endl;
 
-    cout << "Hello" << endl;
+    // cout << "Hello" << endl; // for testing
 
     return 0;
 }
