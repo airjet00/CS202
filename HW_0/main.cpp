@@ -10,6 +10,14 @@ int main(int argc, char *argv[])
     //check ftoc or ctof
     //call function
 
+    string str1 = "ftoc";
+    if (str1.compare(argv[1]) == 0)
+        cout << argv[1] << endl;
+
+    string fstr = argv[2];
+    int f = stoi(fstr); //
+    cout << f - 2 << endl;
+
     cout << "Hello" << endl;
 
     return 0;
