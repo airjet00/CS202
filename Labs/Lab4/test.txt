@@ -41,7 +41,7 @@ int main(int argc, char *argv[]){
     //display file with number lines
     std::string ln;
     std::ifstream file; 
-    file.open("/Users/erikkell/Programming/CS202/CS202/Labs/Lab4/test.txt");
+    file.open("/Users/erikkell/Programming/CS202/CS202/Labs/Lab4/lab04_Streams.cpp");
 
     int count = 0;
     if(file.is_open()){
@@ -65,7 +65,7 @@ int main(int argc, char *argv[]){
     count = 0;
     
     //TODO: Different way to get to begining of file again?
-    file.open("/Users/erikkell/Programming/CS202/CS202/Labs/Lab4/test.txt");
+    file.open("/Users/erikkell/Programming/CS202/CS202/Labs/Lab4/lab04_Streams.cpp");
 
     if(file.is_open()){
         while(getline(file, ln)){
