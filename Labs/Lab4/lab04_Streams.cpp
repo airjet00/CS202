@@ -38,12 +38,12 @@ using std::string;
 using std::cout;
 using std::endl;
 
+//TODO need a better place for this. 
 string fileName = "/Users/erikkell/Programming/CS202/CS202/Labs/Lab4/test.txt";
 
+bool readFile (string fileName){
 
-int main(int argc, char *argv[]){
-
-    // display file with number lines
+        // display file with number lines
     string ln;    
     ifstream inFile(fileName);
     if(inFile.is_open()){
@@ -70,8 +70,56 @@ int main(int argc, char *argv[]){
         
 
     }
-    
+    return true;
+}
 
+bool appendLineToFile(int copies, int line){
+    int count = 1;
+    string ln, appLine;
+    ofstream oFile(fileName, std::ios::out | std::ios::app);
+    ifstream iFile(fileName);
+    
+    for(int i =0; i < line; i++){
+        if(count == line){
+            getline(iFile, ln);
+            // appLine = ln;
+            int j = 0;
+            while(j <  copies)
+            {
+                oFile << ln <<"\n";
+                j++;
+            }
+        }
+        getline(iFile, ln);
+        count++;
+    }
+    
+    cout << count-1 << "\n" << appLine << "\n";
+
+  
+    return true;
+}
+
+
+bool selectLineAppend(){
+    bool result;
+    int numCopies, numLine;
+    cout << "Please enter number of copies to print\n" <<
+                    "then space and number line to print: ";
+    std::cin >> numCopies >> numLine; 
+    cout << "You entered " << numCopies << " copies of line number " << numLine << "\n";
+    result = appendLineToFile(numCopies, numLine);
+    
+    return result;
+
+}
+
+int main(int argc, char *argv[]){
+
+    
+    
+    readFile(fileName);
+    selectLineAppend();
 
 
 // #include <cstdlib>
