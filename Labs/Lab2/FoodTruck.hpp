@@ -9,8 +9,10 @@
 using std::cout;
 using std::endl;
 
+//who doesn't like a good food truck
 class FoodTruck{
     private:
+        //foodtruck id
         int _id;
     public:
         //Default ctor
@@ -33,6 +35,7 @@ class FoodTruck{
 
 };
 
+//functions outside Foodtruck class
 FoodTruck passByRef( FoodTruck& ft);
 
 FoodTruck passByRetByValue(FoodTruck ft);
