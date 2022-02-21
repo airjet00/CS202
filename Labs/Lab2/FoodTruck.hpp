@@ -15,10 +15,13 @@ class FoodTruck{
     public:
         //Default ctor
         FoodTruck()  {cout << "I'm a food truck\n";}
-        //copy ctor
-        FoodTruck(const FoodTruck & t){cout << "copy truck" << endl;}
+        //copy ctor              **Need _id=t._id to copy id**
+        FoodTruck(const FoodTruck & t){_id = t._id; cout << "copy truck" << endl;}
         //ctor with parameter
-        FoodTruck(int id ){cout << "It's id number is: " << id <<"\n";}
+        FoodTruck(int id ){
+            this->_id = id;
+            cout << "Truck id number is: " << id << endl;
+        }
         //dstor
         ~FoodTruck(){cout << "Destroyer\n";}
 

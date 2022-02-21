@@ -50,10 +50,31 @@ N/A
 
 using std::cout;
 using std::endl;
+using std::vector;
 
 int main(){
 
-    FoodTruck ft;
-    ft.setId(1);
+    //Create a vector of foodtrucks and iterate
+    vector<FoodTruck> vFoodTrucks;
+    FoodTruck ft1(2), ft2(3), ft3(4), ft4(5), ft5(6);
+    vFoodTrucks.push_back(ft1);
+    vFoodTrucks.push_back(ft2);
+    vFoodTrucks.push_back(ft3);
+    vFoodTrucks.push_back(ft4);
+    vFoodTrucks.push_back(ft5);
+
+    for (auto t: vFoodTrucks) {
+
+        cout << t.getId() << endl;
+    }
+
+
+//    FoodTruck ft;
+//    ft.setId(1);
+//    cout << vFoodTrucks[1].getId() << endl;
+//    FoodTruck copyFT = ft;
+//    cout << ft.getId() << endl;
+//    cout << copyFT.getId() << endl;
+//    FoodTruck iFt(2);
     return 0;
 }
