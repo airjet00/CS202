@@ -84,5 +84,10 @@ int main(){
     cout << copyFT.getId() << endl;
     cout << taco.getId() << endl;
 
+    //call functions
+    FoodTruck rt = passByRef(ft);
+    FoodTruck vt = passByRetByValue(rt);// id = 42
+    cout << vt.getId() << endl;
+    FoodTruck ct = passConstRef(ft);
     return 0;
 }

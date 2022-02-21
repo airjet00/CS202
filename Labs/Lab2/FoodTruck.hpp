@@ -30,4 +30,11 @@ class FoodTruck{
 
     //get truck id
     int getId();
+
 };
+
+FoodTruck passByRef( FoodTruck& ft);
+
+FoodTruck passByRetByValue(FoodTruck ft);
+
+FoodTruck passConstRef(const FoodTruck& ft);
