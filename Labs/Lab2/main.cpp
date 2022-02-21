@@ -53,7 +53,7 @@ using std::endl;
 using std::vector;
 
 int main(){
-
+/*
     //Create a vector of foodtrucks and iterate
     vector<FoodTruck> vFoodTrucks;
     FoodTruck ft1(2), ft2(3), ft3(4), ft4(5), ft5(6);
@@ -67,14 +67,22 @@ int main(){
 
         cout << t.getId() << endl;
     }
+*/
 
-
-//    FoodTruck ft;
+    //Defaul ctor
+    FoodTruck ft;
 //    ft.setId(1);
-//    cout << vFoodTrucks[1].getId() << endl;
-//    FoodTruck copyFT = ft;
-//    cout << ft.getId() << endl;
-//    cout << copyFT.getId() << endl;
-//    FoodTruck iFt(2);
+
+    //Copy ctor
+    FoodTruck copyFT = ft;
+
+    //Parametarized ctor
+    FoodTruck   taco(9);
+
+    //print out id for each ctor
+    cout << ft.getId() << endl;
+    cout << copyFT.getId() << endl;
+    cout << taco.getId() << endl;
+
     return 0;
 }
