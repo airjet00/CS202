@@ -1,0 +1,22 @@
+/************************************************
+    Author: Erik Kell         Date: 7 Feb 2022
+    Class: CS 202             Title: Lab02 ClassConstDestr
+
+****Purpose****
+
+
+****What to Do****
+
+    1.
+    2.
+    3.
+    4.
+    5.
+    6.
+    7.
+
+
+****Optional next steps****
+N/A
+
+************************************************/
