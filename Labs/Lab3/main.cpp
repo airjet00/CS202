@@ -47,13 +47,28 @@ N/A
 ************************************************/
 #include <cstdlib>
 #include <iostream>
+#include <limits>
 
 using std::cout;
 using std::endl;
 
-
+class Numbs{
+public:
+    static void testNum(){
+        cout << 1000 << endl;
+    }
+};
 int main(){
-    cout << "test test " << endl;
+    int i;
+    cout << std::numeric_limits<int>::max() << endl;
+    int fArray[100];
+    cout <<fArray[2]<< endl;
+    cout <<*(fArray+2)<< endl;
+    Numbs::testNum();
+//    int *iPtr;
+//    int ii=13;
+//    iPtr = &ii;
+//    cout << *iPtr << " is stored at address: " << iPtr << endl;
 
     return 0;
 }
