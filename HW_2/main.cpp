@@ -32,7 +32,11 @@ using std::endl;
 //};
 
 void toLower(char* s){
-    cout << s << endl;
+    int i = 0;
+    while(s[i] != 0){
+        cout << s[i] << endl;
+        i++;
+    }
 }
 
 int main(){
