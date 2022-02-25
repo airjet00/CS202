@@ -27,32 +27,12 @@ N/A
 using std::cout;
 using std::endl;
 
-//struct {
-//
-//};
 
-void toLower(char* s){
-//    char result[] {""};
-    int i = 0;
-    while(s[i] != 0){
-        if(s[i] > 64 && s[i] < 91){
-            s[i] = s[i] + 32;
-            cout << s[i];
-//            result += s[i];
-        }else{
 
-            cout << s[i];
-//            result += s[i];
-        }
-        i++;
-//        cout << result << endl;
-    }
-    cout << "\n";
 }
 
 int main(){
-    char cString[] { "Hello, World!"};
-    toLower(cString);
+
 
     return 0;
 }
