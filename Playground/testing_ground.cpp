@@ -17,5 +17,9 @@ Test new syntax, ideals, or just practice
 int main() {
 
 
+    std::cout << "Hello World\n";
 
+
+
+    return 0;
 }
