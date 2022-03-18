@@ -14,12 +14,11 @@ Test new syntax, ideals, or just practice
 #include <vector>
 #include <limits>
 
-int main() {
 
 
-    std::cout << "Hello World\n";
+int main()
+{
 
-
-
+    std::cout << "test test";
     return 0;
 }
