@@ -20,38 +20,7 @@
 #include <chrono>
 #include <thread>
 
-//class StopWatch{
-//    private:
-//        std::chrono::time_point<std::chrono::steady_clock> start, end;
-//        std::chrono::duration<float> duration;
-//    public:
-//        StopWatch(){
-//            start = std::chrono::high_resolution_clock::now();
-//            std::cout << "Test " << std::endl;
-//        }
-//        void setStart(){
-//            //for restarting clock
-//            //TODO should overwrite constr start variable?
-//             start = std::chrono::system_clock::now();
-//        }
-//        void setStop(){
-//            //End clock
-//            end = std::chrono::system_clock::now();
-//        }
-//        auto getStart(){
-//            return this->start;
-//        }
-//        auto getEnd(){
-//            return this->end;
-//        }
-//        double TimeInSec(){
-//            //TODO calculations
-//            std::chrono::duration<double> duration = this->end - this->start;
-//            return duration;
-//        }
-//
-//
-//};
+//TODO using std chrono and clean up code
 
 class StopWatch{
 private:
@@ -98,9 +67,7 @@ public:
 };
 
 int main(int argc, char *argv[]){
-
-
-
+    
     StopWatch st;
     std::this_thread::sleep_for(std::chrono::seconds(1));
     st.start();
