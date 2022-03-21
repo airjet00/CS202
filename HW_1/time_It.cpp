@@ -53,17 +53,62 @@
 //
 //};
 
+class StopWatch{
+private:
+    //Variable for starting/ending timer
+    std::chrono::time_point<std::chrono::high_resolution_clock> _start, _end, _restart;
+    //Variable for calculating duration
+    std::chrono::duration<double> _duration, _intervalOperation;
+public:
+    //Ctor sets _start and print notification that obj created and associated timer
+    StopWatch(){
+        _start = std::chrono::high_resolution_clock::now();
+        std::cout << "Time started" << std::endl;
+    }
+
+    //Dtor sets _end and calculated total life-time of obj in milliseconds
+    ~StopWatch(){
+        _end = std::chrono::high_resolution_clock::now();
+        _duration = _end - _start;
+
+        double millisec = _duration.count() * 1000.0; //.count returns number of ticks
+        std::cout << "Total object life-time is: " << millisec <<"ms" <<std::endl;
+    }
+
+    //Sets the _restart value for an operation
+    void start(){
+        _restart = std::chrono::high_resolution_clock::now();
+    }
+    //Sets the end time for an operation
+    void stop(){
+        _end = std::chrono::high_resolution_clock::now();
+    }
+    //Prints time for operation in seconds
+    void timeSec(){
+        _intervalOperation = _end - _restart;
+        double seconds = _intervalOperation.count();
+        std::cout << "Time to complete operation: " << seconds << "seconds" << std::endl;
+    }
+    //Prints time for operation in milliseconds
+    void timeMilSec(){
+        _intervalOperation = _end - _restart;
+        double milliseconds = _intervalOperation.count() * 1000.0;
+        std::cout << "Time to complete operation: " << milliseconds << "milliseconds" << std::endl;
+    }
+};
+
 int main(int argc, char *argv[]){
-//    using namespace std::literals::chrono_literals;
 
-    auto start = std::chrono::high_resolution_clock::now();
 
+
+    StopWatch st;
     std::this_thread::sleep_for(std::chrono::seconds(1));
+    st.start();
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    st.stop();
+    st.timeSec();
+    st.timeMilSec();
 
-    auto end = std::chrono::high_resolution_clock::now();
-
-    std::chrono::duration<double> duration = end - start;
-    std::cout << duration.count() << std::endl;
 
 
 
