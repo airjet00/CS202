@@ -18,52 +18,54 @@
 #include <cstdlib>
 #include <iostream>
 #include <chrono>
+#include <thread>
 
-class StopWatch{
-    private:
-        std::chrono::time_point<std::chrono::steady_clock> start, end;
-        std::chrono::duration<float> duration;
-    public:
-        StopWatch(){
-            start = std::chrono::high_resolution_clock::now();
-            std::cout << "Test " << std::endl; 
-        }
-        void setStart(){
-            //for restarting clock
-            //TODO should overwrite constr start variable? 
-             start = std::chrono::system_clock::now();
-        }
-        void setStop(){
-            //End clock
-            end = std::chrono::system_clock::now();
-        }
-        auto getStart(){
-            return this->start;
-        }
-        auto getEnd(){
-            return this->end;
-        }
-        double TimeInSec(){
-            //TODO calculations 
-            std::chrono::duration<double> duration = this->end - this->start;
-            return duration;
-        }
-
-
-};
+//class StopWatch{
+//    private:
+//        std::chrono::time_point<std::chrono::steady_clock> start, end;
+//        std::chrono::duration<float> duration;
+//    public:
+//        StopWatch(){
+//            start = std::chrono::high_resolution_clock::now();
+//            std::cout << "Test " << std::endl;
+//        }
+//        void setStart(){
+//            //for restarting clock
+//            //TODO should overwrite constr start variable?
+//             start = std::chrono::system_clock::now();
+//        }
+//        void setStop(){
+//            //End clock
+//            end = std::chrono::system_clock::now();
+//        }
+//        auto getStart(){
+//            return this->start;
+//        }
+//        auto getEnd(){
+//            return this->end;
+//        }
+//        double TimeInSec(){
+//            //TODO calculations
+//            std::chrono::duration<double> duration = this->end - this->start;
+//            return duration;
+//        }
+//
+//
+//};
 
 int main(int argc, char *argv[]){
-    // auto start = std::chrono::high_resolution_clock::now();
+//    using namespace std::literals::chrono_literals;
 
-    StopWatch test1;
+    auto start = std::chrono::high_resolution_clock::now();
 
-    std::cout << "Result is: ";
+    std::this_thread::sleep_for(std::chrono::seconds(1));
 
-    // auto end = std::chrono::high_resolution_clock::now();
+    auto end = std::chrono::high_resolution_clock::now();
 
-    // std::chrono::duration<double> duration = end - start;    
+    std::chrono::duration<double> duration = end - start;
+    std::cout << duration.count() << std::endl;
 
-    std::cout << test1.TimeInSec() << "s " << std::endl;
+
 
     return 0;
 }
