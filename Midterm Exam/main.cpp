@@ -44,29 +44,52 @@ N/A
 #include <sstream>
 #include <iomanip>
 
-//using namespace std;
 using TYPE = std::string;
+
+void loadFile(std::string fileName)
+{
+    std::vector<TYPE>(fileData);
+    std::ifstream file;
+    file.open(fileName);
+    if(!file.is_open()) return;
+
+    std::string word;
+    while (file >> word)
+    {
+        fileData.push_back(word);
+    }
+
+    for(int i = 0; i < fileData.size(); i++)
+    {
+        std::cout << fileData[i] <<std::endl;
+    }
+}
+
+//using namespace std;
 int main(int argc, char *argv[]){
 
     std::string fileName = "/Users/erikkell/Programming/CS202/CS202/testfile.txt";
 
-    std::vector<std::vector<TYPE> > text;
+    loadFile(fileName);
 
-    std::ifstream fin(fileName);
-    for(std::string line; getline(fin, line);)
-    {
-    std::stringstream ss(line);
-        std::vector<TYPE> row;
-        for(TYPE d; ss >> d; ) row.push_back(d);
-        text.push_back(row);
-    }
-
-    std::cout << "Your text:\n";
-    for(auto &row : text)
-    {
-        for(auto &item : row) std::cout << std::setw(5) <<item << ' ' ;
-        std::cout << '\n';
-    }
+//    std::vector<std::vector<TYPE> > text;
+//
+//    std::ifstream fin(fileName);
+//    for(std::string line; getline(fin, line);)
+//    {
+//        std::stringstream ss(line);
+//        std::vector<TYPE> row;
+//
+//        for(TYPE d; ss >> d; ) row.push_back(d);
+//        text.push_back(row);
+//    }
+//
+//    std::cout << "Your text:\n";
+//    for(auto &row : text)
+//    {
+//        for(auto &item : row) std::cout << std::setw(5) <<item << ' ' ;
+//        std::cout << '\n';
+//    }
 
     return 0;
 }
