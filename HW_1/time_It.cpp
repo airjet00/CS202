@@ -66,8 +66,19 @@ public:
     }
 };
 
+
+class TestTimeIt{
+
+public:
+    TestTimeIt();
+
+    void listGenerator(int range, int seedNum){
+
+    }
+};
+
 int main(int argc, char *argv[]){
-    
+
     StopWatch st;
     std::this_thread::sleep_for(std::chrono::seconds(1));
     st.start();
