@@ -43,6 +43,7 @@ N/A
 
 
 using TYPE = std::string;
+using std::stoi;
 
 //Method prints the text with x number of char per line
 void printFile(std::vector<TYPE> fileData, const int charPerLine){
@@ -74,8 +75,9 @@ void printFile(std::vector<TYPE> fileData, const int charPerLine){
     std::cout << "\n";
 }
 
-//open file method
-void loadFile(std::string fileName, const int charPerLine)
+//run file method
+void runFile(std::string fileName, const int linesPerPage,
+             const int columnWidth, const int spaceBetweenColumns)
 {
     std::vector<TYPE>(fileData);
     std::ifstream file;
@@ -88,20 +90,26 @@ void loadFile(std::string fileName, const int charPerLine)
         fileData.push_back(word);
     }
     //call to print file
-    printFile(fileData, charPerLine);
+    printFile(fileData, columnWidth);
 }
 
 int main(int argc, char *argv[]){
 
     std::string fileName = argv[1];
-    const char* chNum = argv[2];
-    const int charPerLine = std::stoi(chNum);
+    const char* chLinesPerPage = argv[2];
+    const char* chColumnWidth = argv[3];
+    const char* chSpaceBetweenColumns = argv[4];
+
+    const int linesPerPage = stoi(chLinesPerPage);
+    const int columnWidth = stoi(chColumnWidth);
+    const int spaceBetweenColumns = stoi(chSpaceBetweenColumns);
 
     //TEST TEXT FILES
     //    std::string fileName = "/Users/erikkell/Programming/CS202/CS202/testfile.txt";
     //    /Users/erikkell/Programming/CS202/CS202/ten_page_book.txt
 
-    loadFile(fileName, charPerLine);
+    runFile(fileName, linesPerPage, columnWidth, spaceBetweenColumns);
 
     return 0;
 }
+
