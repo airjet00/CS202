@@ -59,14 +59,39 @@ void loadFile(std::string fileName)
         fileData.push_back(word);
     }
 
+    int count = 0;
     for(int i = 0; i < fileData.size(); i++)
     {
-        std::cout << fileData[i] <<std::endl;
+//        std::cout << fileData[i].size() << std::endl;
+        if((count + fileData[i].size()) < 50){
+            std::cout << fileData[i] << " ";
+            count = count + fileData[i].size() +1;
+        }
+        else if((count + fileData[i].size()) == 50)
+        {
+            std::cout << fileData[i];
+            count = count + fileData[i].size();
+        }
+        else if((count + fileData[i].size()) > 50)
+        {
+            std::cout << count << "\n";
+            count = 0;
+            continue;
+        }
+        else
+        {
+            break;
+        }
+
+
     }
+    std::cout << count << "\n";
 }
 
 //using namespace std;
 int main(int argc, char *argv[]){
+
+    std::cout << "Section 1.10.33 of \"de Finibus Bonorum et" << std::endl;
 
     std::string fileName = "/Users/erikkell/Programming/CS202/CS202/testfile.txt";
 
