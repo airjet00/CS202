@@ -46,34 +46,43 @@ using TYPE = std::string;
 using std::stoi;
 
 //Method prints the text with x number of char per line
-void printFile(std::vector<TYPE> fileData, const int charPerLine){
+void printFile(std::vector<TYPE> fileData, const int linesPerPage,
+               const int columnWidth, const int spaceBetweenColumns) {
+
+    int countcheck = 0;
+    int countLines = 0;
     int count = 0;
-    for(int i = 0; i < fileData.size(); i++)
-    {
+    std::vector <TYPE> strColumn1;
+    std::vector <TYPE> strColumn2;
+    for (int i = 0; i < fileData.size(); i++) {
+
+        std::string s;
         //checking char count on each line and printing if 50 or under
-        if((count + fileData[i].size()) < charPerLine){
-            std::cout << fileData[i] << " ";
-            count = count + fileData[i].size() +1;
-        }
-        else if((count + fileData[i].size()) == charPerLine)
-        {
-            std::cout << fileData[i];
+        if ((count + fileData[i].size()) < columnWidth) {
+            s = fileData[i] + " ";
+            strColumn1.push_back(s);
+//            std::cout << fileData[i] << " ";
+            count = count + fileData[i].size() + 1;
+        } else if ((count + fileData[i].size()) == columnWidth) {
+//            std::cout << fileData[i];
+            strColumn1.push_back(fileData[i]);
             count = count + fileData[i].size();
-        }
-        else if((count + fileData[i].size()) > charPerLine)
-        {
+        } else if ((count + fileData[i].size()) > columnWidth) {
 //            std::cout << count << "\n"; //to check count of each line
-            std::cout << "\n";
+            strColumn1.push_back("\n");
             count = 0;
             continue;
-        }
-        else
-        {
+        } else {
             break;
         }
+    }   strColumn1.push_back("\n");
+    for (const auto &w : strColumn1) {
+        std::cout << w;
+
     }
-    std::cout << "\n";
 }
+
+
 
 //run file method
 void runFile(std::string fileName, const int linesPerPage,
@@ -90,7 +99,7 @@ void runFile(std::string fileName, const int linesPerPage,
         fileData.push_back(word);
     }
     //call to print file
-    printFile(fileData, columnWidth);
+    printFile(fileData, linesPerPage, columnWidth, spaceBetweenColumns);
 }
 
 int main(int argc, char *argv[]){
