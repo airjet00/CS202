@@ -53,32 +53,34 @@ std::vector<TYPE> createColumn(std::vector<TYPE> fileData, const int linesPerPag
     std::string s;
     int count = 0;
     int countLines = 0;
-    std::cout << "width: " << columnWidth << "count" << columnCount << std::endl;
-        for (int i = columnCount; i < fileData.size(); i++) {
-//    std::cout << s.size() + fileData[i].size() << std::endl;
-            columnCount = i;
-            std::cout << i << std::endl;
+
+        for (int i = columnCount; i <= fileData.size(); i++) {
+
             if ((s.size() + fileData[i].size()) < columnWidth) {
                 s.append(fileData[i]).append(" ");
-//                count = count + fileData[i].size() + 1;
+                columnCount = i;
+                if(columnCount == fileData.size()) {
+                    vColumn.push_back(s);
+                    return vColumn;
+                }
 
             } else if ((s.size() + fileData[i].size()) == columnWidth) { //so we have no space at end of line
                 s.append(fileData[i]);
-//                count = count + fileData[i].size();
+                vColumn.push_back(s);
+                s = "";
+                columnCount = i;
+                countLines++;
+                if(countLines == linesPerPage || columnCount == fileData.size()) return vColumn;
 
             } else if ((s.size() + fileData[i].size()) > columnWidth) {
-//            std::cout << count << "\n"; //to check count of each line
-//                s.append("\n");
                 vColumn.push_back(s);
+                columnCount = i;
                 i--;
                 countLines++;
-//                std::cout << "**************" << std::endl;
                 s = "";
-                std::cout << "Count __ : " << columnCount << std::endl;
                 if(countLines == linesPerPage) return vColumn;
             }
-        }std::cout << "Count __ : " << columnCount << std::endl;
-    std::cout << "______________" <<  countLines << "__________" << vColumn.size() <<std::endl;
+        }
     return vColumn;
 }
 
@@ -109,6 +111,7 @@ void printFile(std::vector<TYPE> fileData, const int linesPerPage,
                 LTCount++;
 //                strColumn1.push_back("--------------");  don't do this now, after column build, it and insert
                 if (strColumn1.size() != (linesPerPage * LTCount)) {
+                    std::cout << dataPlace << " and1 " << strColumn1.size() << std::endl;
                     flag = false;
                     break;
                 }
@@ -119,7 +122,9 @@ void printFile(std::vector<TYPE> fileData, const int linesPerPage,
                 std::vector <TYPE> vectorCol2 = createColumn(fileData, linesPerPage, columnWidth, dataPlace);
                 strColumn2.insert(strColumn2.end(), vectorCol2.begin(), vectorCol2.end());
                 RTCount++;
+
                 if (strColumn2.size() != (linesPerPage * RTCount)) {
+                    std::cout << dataPlace << " and2 " << strColumn2.size() << " andsize " << fileData.size()<<std::endl;
                     flag = false;
                 std::cout <<"Col 2: " <<strColumn2.size() << std::endl;
                     break;
@@ -127,81 +132,7 @@ void printFile(std::vector<TYPE> fileData, const int linesPerPage,
             }
         }
 
-//        //Add to column 1
-//        if (flag) {
-//            //checking char count on each line and printing if 50 or under
-//            if ((count + fileData[i].size()) < columnWidth) {
-//                s.append(fileData[i]).append(" ");
-////                strColumn1.push_back(s);
-////            std::cout << fileData[i] << " ";
-//                count = count + fileData[i].size() + 1;
-//                continue;
-//            } else if ((count + fileData[i].size()) == columnWidth) {
-//                s.append(fileData[i]);
-////            std::cout << fileData[i];
-////                strColumn1.push_back(fileData[i]);
-//                count = count + fileData[i].size();
-//                continue;
-//            } else if ((count + fileData[i].size()) > columnWidth) {
-////            std::cout << count << "\n"; //to check count of each line
-////                s.append("\n");
-//                strColumn1.push_back(s);
-//                countLines++;
-//                count = 0;
-////                continue;
-//            }
-////            else {
-////                break;
-////            }
-//
-//            if(countLines >= linesPerPage){
-//                strColumn2.push_back("\n -----------------------\n");
-//                countLines = 0;
-//                count=0;
-//                s = "";
-//                flag = false;
-//                continue;
-//            }
-//        }
-//        //Column 2
-//        if (!flag){
-//
-//            std::string s2;
-//            //checking char count on each line and printing if 50 or under
-//            if ((count + fileData[i].size()) < columnWidth) {
-//                s2.append(fileData[i]).append(" ");
-////                strColumn1.push_back(s);
-////            std::cout << fileData[i] << " ";
-//                count = count + fileData[i].size() + 1;
-//                continue;
-//            } else if ((count + fileData[i].size()) == columnWidth) {
-//                s2.append(fileData[i]);
-////            std::cout << fileData[i];
-////                strColumn1.push_back(fileData[i]);
-//                count = count + fileData[i].size();
-//                continue;
-//            } else if ((count + fileData[i].size()) > columnWidth) {
-////            std::cout << count << "\n"; //to check count of each line
-////                s.append("\n");
-//                strColumn2.push_back(s2);
-//                countLines++;
-//                count = 0;
-////                continue;
-//            }
-////            else {
-////                break;
-////            }
-//
-//            if(countLines >= linesPerPage){
-//                strColumn2.push_back("\n -----------------------\n");
-//                countLines = 0;
-//                count = 0;
-//                flag = true;
-//                continue;
-//            }
-//        }
-//
-//    }
+
 // Testing loop
         for (int p = 0; p < 42; p++) {
             std::cout << strColumn1[p] << spaceBC << strColumn2[p] << std::endl;
