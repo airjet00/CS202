@@ -53,18 +53,20 @@ std::vector<TYPE> createColumn(std::vector<TYPE> fileData, const int linesPerPag
     std::string s;
     int count = 0;
     int countLines = 0;
-
+        //loop thr and build column using columnCount as a ref for i
         for (int i = columnCount; i <= fileData.size(); i++) {
-
+            //if less than column width
             if ((s.size() + fileData[i].size()) < columnWidth) {
-                s.append(fileData[i]).append(" ");
                 columnCount = i;
                 if(columnCount == fileData.size()) {
+                    s.append(fileData[i]);
                     vColumn.push_back(s);
                     return vColumn;
                 }
+                s.append(fileData[i]).append(" ");
 
-            } else if ((s.size() + fileData[i].size()) == columnWidth) { //so we have no space at end of line
+            //if equal to column width
+            } else if ((s.size() + fileData[i].size()) == columnWidth) {
                 s.append(fileData[i]);
                 vColumn.push_back(s);
                 s = "";
@@ -72,6 +74,7 @@ std::vector<TYPE> createColumn(std::vector<TYPE> fileData, const int linesPerPag
                 countLines++;
                 if(countLines == linesPerPage || columnCount == fileData.size()) return vColumn;
 
+            //if greater than column width
             } else if ((s.size() + fileData[i].size()) > columnWidth) {
                 vColumn.push_back(s);
                 columnCount = i;
@@ -88,77 +91,73 @@ std::vector<TYPE> createColumn(std::vector<TYPE> fileData, const int linesPerPag
 void printFile(std::vector<TYPE> fileData, const int linesPerPage,
                const int columnWidth, const int spaceBetweenColumns) {
 
-    std::string spaceBC;
-    for (int i = 0; i < spaceBetweenColumns; i++) spaceBC.append(" ");
-
     int LTCount = 0;
     int RTCount = 0;
-
-    int countcheck = 0;
-    int countLines = 0;
-    int count = 0;
     bool flag = true;
+    int dataPlace = 0;
+    std::string s;
     std::vector <TYPE> strColumn1;
     std::vector <TYPE> strColumn2;
-    int dataPlace = 0;
-            std::string s;
 
-        //could do ((countLines / linesPerPage) + 2) % 2 ==  0 or 1
         while(flag) {
+            //When even, make left column
             if ((LTCount + RTCount) % 2 == 0) {
+                //dataPlace to calc where at in fileData
                 std::vector <TYPE> vectorCol1 = createColumn(fileData, linesPerPage, columnWidth,dataPlace);
                 strColumn1.insert(strColumn1.end(), vectorCol1.begin(), vectorCol1.end());
                 LTCount++;
-//                strColumn1.push_back("--------------");  don't do this now, after column build, it and insert
+                //if size doesn't match line count then is uneven column and finished
                 if (strColumn1.size() != (linesPerPage * LTCount)) {
-                    std::cout << dataPlace << " and1 " << strColumn1.size() << std::endl;
                     flag = false;
                     break;
                 }
-                std::cout << "Col 1:" <<strColumn1.size() << std::endl;
-                std::cout << "data count:" << dataPlace << std::endl;
+            //When odd, make right column
             } else if ((LTCount + RTCount) % 2 != 0) {
-                //TODO add new line to end of line  //LT to calc where at in fileData
+                //dataPlace to calc where at in fileData
                 std::vector <TYPE> vectorCol2 = createColumn(fileData, linesPerPage, columnWidth, dataPlace);
                 strColumn2.insert(strColumn2.end(), vectorCol2.begin(), vectorCol2.end());
                 RTCount++;
 
+                //if size doesn't match line count then is uneven column and finished
                 if (strColumn2.size() != (linesPerPage * RTCount)) {
-                    std::cout << dataPlace << " and2 " << strColumn2.size() << " andsize " << fileData.size()<<std::endl;
                     flag = false;
-                std::cout <<"Col 2: " <<strColumn2.size() << std::endl;
                     break;
                 }
             }
         }
-
-
-// Testing loop
-        for (int p = 0; p < 42; p++) {
-            std::cout << strColumn1[p] << spaceBC << strColumn2[p] << std::endl;
-
-
+// printing loop
+    std::string spaceBC;
+    int count = 0;
+    std::ofstream resultFile("resultTest.txt");
+    for (int p = 0; p < strColumn1.size(); p++) {
+        //counting space between columns
+        while((columnWidth - strColumn1[p].size() + spaceBetweenColumns) != spaceBC.size()) {
+            spaceBC.append(" ");
         }
-        std::cout << strColumn2.size() <<std::endl;
-//    for (int x = 0; x < 39; ++x) {
-//            std::cout << strColumn2[x] << std::endl;
-//
-//    }
-//        std::cout << strColumn1.size() << std::endl;
-//        std::cout << strColumn2.size() << std::endl;
-//        std::cout << "_________________" << std::endl;
-//        std::string st;
-//        std::string str;
-//        st.append(strColumn1[0]).append(spaceBC);
-//        str.append(strColumn2[1]).append(spaceBC);
-//        std::cout << st;
-//        std::cout << str;
+        //print to file/screen
+        resultFile << strColumn1[p] << spaceBC << strColumn2[p] << "\n";
+        std::cout << strColumn1[p] << spaceBC << strColumn2[p] << std::endl;
+
+        //testing column size and spaces
+//        std::cout << spaceBC.size() << " col size: " << strColumn1[p].size() <<std::endl;
+
+        spaceBC = "";
+        //adding pg break
+        if(((p+1) % linesPerPage) == 0){
+            std::cout << "\n------------- Pg. " << ((p+1)/linesPerPage) <<" ----------------\n" << std::endl;
+            resultFile << "\n------------- Pg. " << ((p+1)/linesPerPage) <<" ----------------\n";
+        }
+
+    }
+    resultFile.close();
+
 }
 
 //run file method
 void runFile(std::string fileName, const int linesPerPage,
              const int columnWidth, const int spaceBetweenColumns)
 {
+    //open and added to vector fileData
     std::vector<TYPE>(fileData);
     std::ifstream file;
     file.open(fileName);
@@ -175,21 +174,23 @@ void runFile(std::string fileName, const int linesPerPage,
 
 int main(int argc, char *argv[]){
 
+    //Arguments from command line
     std::string fileName = argv[1];
     const char* chLinesPerPage = argv[2];
     const char* chColumnWidth = argv[3];
     const char* chSpaceBetweenColumns = argv[4];
 
+    //convert to int
     const int linesPerPage = stoi(chLinesPerPage);
     const int columnWidth = stoi(chColumnWidth);
     const int spaceBetweenColumns = stoi(chSpaceBetweenColumns);
 
-    //TEST TEXT FILES
-    //    std::string fileName = "/Users/erikkell/Programming/CS202/CS202/testfile.txt";
-    //    /Users/erikkell/Programming/CS202/CS202/ten_page_book.txt
-
+    //run method call
     runFile(fileName, linesPerPage, columnWidth, spaceBetweenColumns);
 
+    //TEST TEXT FILES, for future testing
+    //    /Users/erikkell/Programming/CS202/CS202/testfile.txt
+    //    /Users/erikkell/Programming/CS202/CS202/ten_page_book.txt
     return 0;
 }
 
