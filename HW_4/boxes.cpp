@@ -70,6 +70,37 @@ N/A
 #include <cstdlib>
 #include <iostream>
 
+//Box - Abstract base class
+class Box {
+public:
+    Box(){ std::cout << "Box ctor" << std::endl;}
+    Box(int w, int h){ _width = w; _height = h; std::cout << "Box ctor int\n";}
+
+    void setWidth(int w){
+        _width = w;
+    }
+    void setHeight(int h){
+        _height = h;
+    }
+    int getWidth(){
+        return _width;
+    }
+    int getHeight(){
+        return _height;
+    }
+
+private:
+    int _width, _height;
+};
+
+//derived - FilledBox
+
+
+//derived - HollowBox
+
+
+//derived - CheckeredBox
+
 //Print to screen method
 void printBoxScreen(int width, int height){
 
@@ -81,6 +112,11 @@ void printBoxScreen(int width, int height){
 int main(){
 
     printBoxScreen(5, 6);
+    Box b(2, 3);
+    std::cout << b.getHeight() << " and " << b.getWidth() << std::endl;
+    b.setHeight(9);
+    b.setWidth(0);
+    std::cout << b.getHeight() << " and " << b.getWidth() << std::endl;
 
     return 0;
 }
